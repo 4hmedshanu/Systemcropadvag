@@ -1,0 +1,65 @@
+package com.example_Backend.entityServices;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+@Service
+public class WhatsAppService {
+	
+	
+	@Value("${whatsapp.api.url}")
+    private String apiUrl;
+
+    @Value("${whatsapp.phone.id}")
+    private String phoneId;
+
+    @Value("${whatsapp.token}")
+    private String token="EAAQwfparameter is either empty or invalid.5mzopm0xGUZCkZCQsveK4UeiYwXNmx9PZCULJxNkzszvowzmPSyuKparameter is either empty or invalid.jZCS3EsJ4h3vbA3hPpaLmikh1ZB2R9ZBn9d7kHV7Dg1chkZBgZCdFRiZCGzUZBD4rZBGNDKKkk3Pcvrnp5L643parameter is either empty or invalid.feg5VLJvx5Ep6E8lid1BnmhlzUXgr05cxout6Pg76Mh";
+    
+    
+    public void sendTextMessage(String to, String message) {
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(token);
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        String body = """
+        	    {
+        	      "messaging_product": "whatsapp",
+        	      "to": "%s",
+        	      "type": "template",
+        	      "template": {
+        	        "name": "your_template_name",
+        	        "language": { "code": "en_US" },
+        	        "components": [
+        	          {
+        	            "type": "body",
+        	            "parameters": [
+        	              { "type": "text", "text": "%s" }
+        	            ]
+        	          }
+        	        ]
+        	      }
+        	    }
+        	    """.formatted(to, message);
+
+        HttpEntity<String> request = new HttpEntity<>(body, headers);
+
+        restTemplate.postForObject(
+            apiUrl + "/" + phoneId + "/messages",
+            request,
+            String.class
+        );
+    }
+
+    
+    
+ 
+
+}

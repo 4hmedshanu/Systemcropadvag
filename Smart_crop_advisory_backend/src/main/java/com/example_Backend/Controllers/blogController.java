@@ -1,9 +1,10 @@
 package com.example_Backend.Controllers;
 
-import java.security.Principal;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,13 +22,16 @@ import com.example_Backend.entityServices.BlogServices;
 
 
 @RestController
-@RequestMapping("/blog")
+@RequestMapping( "/blog" )
 public class blogController {
 	
 	@Autowired
 	BlogServices blogServices;
 	
-	@PostMapping("/createBlog")
+	@PostMapping( value ="/createBlog" , 
+			consumes = MediaType.APPLICATION_JSON_VALUE,
+	        produces = MediaType.APPLICATION_JSON_VALUE
+			)
 	public BlogPostEntity createBlog(@RequestBody BlogPostEntity blog , @RequestParam("email")  String email) {
 		return this.blogServices.createBlog(blog, email);
 	}

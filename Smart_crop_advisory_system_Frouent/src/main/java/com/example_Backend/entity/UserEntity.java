@@ -18,6 +18,7 @@ public class UserEntity {
     private String language;
     private String district;
     private String state;
+    private int otp;
     private LocalDateTime createdAt;
     
     private List<BlogPostEntity> blogPosts;
@@ -103,12 +104,27 @@ public class UserEntity {
 		this.createdAt = createdAt;
 		this.blogPosts = blogPosts;
 	}
+	
+	
+	public int getOtp() {
+		return otp;
+	}
+	public void setOtp(int otp) {
+		this.otp = otp;
+	}
+	public UserEntity() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	@Override
 	public String toString() {
 		return "UserEntity [userId=" + userId + ", name=" + name + ", email=" + email + ", phone=" + phone
 				+ ", passwordHash=" + passwordHash + ", role=" + role + ", language=" + language + ", district="
-				+ district + ", state=" + state + ", createdAt=" + createdAt + ", blogPosts=" + blogPosts + "]";
+				+ district + ", state=" + state + ", otp=" + otp + ", createdAt=" + createdAt + ", blogPosts="
+				+ blogPosts + "]";
 	}
+	
+	
 	
 	
 	

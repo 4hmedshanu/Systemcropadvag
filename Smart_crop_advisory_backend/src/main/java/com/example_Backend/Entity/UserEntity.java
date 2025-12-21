@@ -33,31 +33,33 @@ public class UserEntity {
     private String language;
     private String district;
     private String state;
+    private int otp;
     private LocalDateTime createdAt;
 
     // --- Relationships ---
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-   
+    @JsonIgnore
     private List<SessionEntity> sessions;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-   
+    @JsonIgnore
     private List<SoilReportEntity> soilReports;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-   
+    @JsonIgnore
     private List<PestReportEntity> pestReports;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    
+    @JsonIgnore
     private List<WeatherHistoryEntity> weatherHistory;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-  
+    @JsonIgnore
     private List<AlertEntity> alerts;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonBackReference
+    @JsonIgnore
     private List<BlogPostEntity> blogPosts;
 
 	public UserEntity() {
@@ -215,6 +217,16 @@ public class UserEntity {
 	public void setBlogPosts(List<BlogPostEntity> blogPosts) {
 		this.blogPosts = blogPosts;
 	}
+
+	public int getOtp() {
+		return otp;
+	}
+
+	public void setOtp(int otp) {
+		this.otp = otp;
+	}
+	
+	
     
     
     

@@ -360,6 +360,19 @@
         .send-btn:hover {
             background-color: #c8e6c9;
         }
+        
+        
+        .audio-btn {
+		    margin-left: 10px;
+		    background: none;
+		    border: none;
+		    cursor: pointer;
+		    font-size: 1rem;
+		    color: #4CAF50;
+		}
+
+        
+        
 
     </style>
 </head>
@@ -427,8 +440,14 @@
                         <i class="fas fa-robot"></i>
                     </div>
                     <div class="msg-bubble bot-bubble">
-                        Hello! How can I help you today with your crops or farm management? I can provide advice on pests, irrigation, soil health, and more.
-                    </div>
+					    <span class="msg-text">
+					        Hello! How can I help you today with your crops or farm management?
+					    </span>
+					    <button class="audio-btn" onclick="speakTextFromButton(this)">🔊</button>
+					</div>
+
+                    
+                    
                 </div>
 
             </div>
@@ -477,6 +496,26 @@
                     image.classList.remove("hidden");
                 });
             </script>
+            
+		            <script>
+		    function speakTextFromButton(btn) {
+		        const text = btn
+		            .closest(".msg-bubble")
+		            .querySelector(".msg-text")
+		            .innerText;
+		
+		        // Stop previous speech
+		        window.speechSynthesis.cancel();
+		
+		        const speech = new SpeechSynthesisUtterance(text);
+		        speech.lang = "hi-IN";   // Hindi / Hinglish
+		        speech.rate = 1;
+		        speech.pitch = 1;
+		
+		        window.speechSynthesis.speak(speech);
+		    }
+		</script>
+
     
 
     <script src="jsfile/multilingualchatbot.js"></script>

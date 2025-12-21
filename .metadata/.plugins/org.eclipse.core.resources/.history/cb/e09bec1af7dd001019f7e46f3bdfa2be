@@ -1,0 +1,11 @@
+spring.application.name=Smart_crop_advisory_system_Frouent
+server.port=8080
+
+
+spring.mail.host=smtp.gmail.com
+spring.mail.port=587
+spring.mail.username=shanuahmed03@gmail.com
+spring.mail.password=Gmail@com03
+spring.mail.properties.mail.smtp.auth=true
+spring.mail.properties.mail.smtp.starttls.enable=true
+

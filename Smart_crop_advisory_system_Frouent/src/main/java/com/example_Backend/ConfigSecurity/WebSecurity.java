@@ -25,9 +25,20 @@ public class WebSecurity {
 		http
         .csrf(csrf -> csrf.disable())
         .authorizeHttpRequests(auth -> auth
-            .requestMatchers("/login", "/signup", "/cssfile/**", "/jsfile/**" , "/img/**").permitAll()
-            .anyRequest().authenticated()
-        )
+        	    .requestMatchers(
+        	        "/login",
+        	        "/signup",
+        	        "/generatedOtp",
+        	        "/sussregister",
+        	        "/cssfile/**",
+        	        "/jsfile/**",
+        	        "/img/**","/"
+        	    ).permitAll()
+
+        	    .requestMatchers("/blogpage").hasAnyRole("USER","ADMIN")
+
+        	    .anyRequest().authenticated()
+        	)
         .formLogin(form -> form
                 .loginPage("/login")          // custom login page URL
                 .loginProcessingUrl("/login")// form action

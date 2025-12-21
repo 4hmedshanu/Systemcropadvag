@@ -1,0 +1,23 @@
+package com.example_Backend.entityServices;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+@Service
+public class WhatsAppService {
+	
+	
+	@Value("${whatsapp.api.url}")
+    private String apiUrl;
+
+    @Value("${whatsapp.phone.id}")
+    private String phoneId;
+
+    @Value("${whatsapp.token}")
+    private String token;
+    
+    
+	
+	
+
+}

@@ -1,0 +1,5 @@
+package com.example_Backend.repository;
+
+public class EmailService {
+
+}

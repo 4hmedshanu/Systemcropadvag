@@ -20,15 +20,21 @@ public class ChatController {
 	chatcClientservices ChatClient;
 	
 	
-////	You are an agriculture expert. Answer using Indian farming conditions.
-//	@GetMapping("/ask")
-//	public String agricultureAI(@RequestParam ("q") String question) {
-//		return ChatClient.ask(question);
-//	}
+//////	You are an agriculture expert. Answer using Indian farming conditions.
+	@GetMapping("/demo")
+	public String agricultureAI(@RequestParam ("q") String question) {
+		return ChatClient.ask(question);
+	}
 	
 	@GetMapping("/ask")
 	public Flux<String> steemchat(@RequestParam ("q") String question){
 		return ChatClient.Streemchat(question);
 	}
+	
+	@GetMapping("/alert")
+	public String agricultureAIalert(@RequestParam ("lang") String lange) {
+		return ChatClient.Diseasealert(lange);
+	}
+	
 
 }

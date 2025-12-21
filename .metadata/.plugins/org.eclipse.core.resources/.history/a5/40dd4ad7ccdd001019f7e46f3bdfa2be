@@ -1,0 +1,23 @@
+spring.application.name=Smart_crop_advisory_backend
+
+server.port=8082
+
+# Database Connection
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.datasource.url=jdbc:mysql://localhost:3306/smart_crop_advisory_db
+spring.datasource.username=root
+spring.datasource.password=shanu03
+
+# JPA / Hibernate Config
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
+
+# OpenAI main API key (works for all models: chat, embedding, speech, etc.)
+spring.ai.openai.api-key=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
+
+
+
+whatsapp.api.url=https://graph.facebook.com/v22.0
+whatsapp.phone.id=957968587391893
+whatsapp.token=EAAQwfparameter is either empty or invalid.5mzopm0xGUZCkZCQsveK4UeiYwXNmx9PZCULJxNkzszvowzmPSyuKparameter is either empty or invalid.jZCS3EsJ4h3vbA3hPpaLmikh1ZB2R9ZBn9d7kHV7Dg1chkZBgZCdFRiZCGzUZBD4rZBGNDKKkk3Pcvrnp5L643parameter is either empty or invalid.feg5VLJvx5Ep6E8lid1BnmhlzUXgr05cxout6Pg76Mh

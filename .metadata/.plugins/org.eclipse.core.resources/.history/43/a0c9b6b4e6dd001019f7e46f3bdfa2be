@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Farmer Registration | KrishiSahayak</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet"
+ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+ rel="stylesheet">
+
+<style>
+*{box-sizing:border-box;font-family:Poppins}
+body{
+    background:#f4f7f0;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+.wizard-container{
+    width:100%;
+    max-width:480px;
+    background:#fff;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+    overflow:hidden;
+}
+.wizard-header{
+    background:#7cb62f;
+    color:#fff;
+    text-align:center;
+    padding:25px;
+}
+.progress-wrapper{
+    display:flex;
+    justify-content:center;
+    margin-top:15px;
+}
+.step-indicator{
+    width:35px;height:35px;
+    border-radius:50%;
+    background:rgba(255,255,255,.4);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:600;
+    margin:0 10px;
+}
+.step-indicator.active{background:#fff;color:#7cb62f}
+.step-indicator.completed{background:#2c3e50;color:#fff}
+.form-body{padding:25px}
+.step-content{display:none}
+.step-content.active{display:block}
+input,select{
+    width:100%;
+    padding:12px;
+    margin-bottom:12px;
+    border-radius:8px;
+    border:1px solid #ddd;
+}
+.btn-action{
+    width:100%;
+    padding:14px;
+    background:#7cb62f;
+    border:none;
+    color:#fff;
+    font-size:16px;
+    border-radius:10px;
+    cursor:pointer;
+}
+.btn-secondary{
+    margin-top:10px;
+    background:#f0f0f0;
+    color:#333;
+}
+.otp-inputs{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+}
+.otp-box{
+    width:45px;height:45px;
+    font-size:20px;
+    text-align:center;
+}
+</style>
+</head>
+
+<body>
+
+<div class="wizard-container">
+
+    <div class="wizard-header">
+        <h2>Create Account</h2>
+        <p>Join the KrishiSahayak Community</p>
+
+        <div class="progress-wrapper">
+            <div class="step-indicator active">1</div>
+            <div class="step-indicator">2</div>
+            <div class="step-indicator">3</div>
+        </div>
+    </div>
+
+    <div class="form-body">
+
+        <!-- ================= FORM 1 (STEP 1) ================= -->
+        <form id="formStep1">
+            <div class="step-content active" id="step1">
+
+                <h3><i class="fas fa-user-circle"></i> Personal Details</h3>
+
+                <input id="fullName" placeholder="Full Name" required>
+                <input id="phoneNumber" placeholder="Phone Number" maxlength="10" required>
+                <input id="email" placeholder="Email (Optional)">
+                <input id="password" type="password" placeholder="Password" required>
+                <input id="confirmPassword" type="password" placeholder="Confirm Password" required>
+
+                <button type="button" class="btn-action"
+                        onclick="validateStep1(this)">
+                    Next Step <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </form>
+
+        <!-- ================= FORM 2 (STEP 2 + STEP 3) ================= -->
+        <form id="formStep2" action="sussregister" method="post">
+
+            <!-- STEP 2 -->
+            <div class="step-content" id="step2">
+                <h3><i class="fas fa-shield-alt"></i> Verify Phone</h3>
+
+                <div class="otp-inputs">
+                    <input class="otp-box" maxlength="1">
+                    <input class="otp-box" maxlength="1">
+                    <input class="otp-box" maxlength="1">
+                    <input class="otp-box" maxlength="1">
+                </div>
+
+                <button type="button" class="btn-action"
+                        onclick="validateStep2()">
+                    Verify & Proceed
+                </button>
+
+                <button type="button"
+                        class="btn-action btn-secondary"
+                        onclick="showStep(1)">
+                    Back
+                </button>
+            </div>
+
+            <!-- STEP 3 -->
+            <div class="step-content" id="step3">
+                <h3><i class="fas fa-map-marker-alt"></i> Complete Profile</h3>
+
+                <select name="language" required>
+                    <option value="">Preferred Language</option>
+                    <option value="en">English</option>
+                    <option value="hi">Hindi</option>
+                </select>
+
+                <select name="state" required>
+                    <option value="">State</option>
+                    <option>Punjab</option>
+                    <option>Uttar Pradesh</option>
+                </select>
+
+                <select name="district" required>
+                    <option value="">District</option>
+                </select>
+
+                <select name="city" required>
+                    <option value="">City</option>
+                </select>
+
+                <!-- FINAL SUBMIT -->
+                <button type="submit" class="btn-action">
+                    Complete Registration <i class="fas fa-rocket"></i>
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+<script>
+let currentStep = 1;
+
+function showStep(step){
+    document.querySelectorAll(".step-content")
+        .forEach(s=>s.classList.remove("active"));
+    document.getElementById("step"+step).classList.add("active");
+
+    document.querySelectorAll(".step-indicator").forEach((dot,i)=>{
+        dot.classList.remove("active","completed");
+        if(i+1===step) dot.classList.add("active");
+        if(i+1<step) dot.classList.add("completed");
+    });
+}
+
+function validateStep1(btn){
+    if(password.value!==confirmPassword.value){
+        alert("Passwords do not match");
+        return;
+    }
+
+    btn.disabled=true;
+    btn.innerHTML="Sending OTP...";
+
+    setTimeout(()=>{
+        btn.disabled=false;
+        btn.innerHTML='Next Step <i class="fas fa-arrow-right"></i>';
+        showStep(2);
+        alert("Mock OTP: 1234");
+    },800);
+}
+
+function validateStep2(){
+    const otp=[...document.querySelectorAll(".otp-box")]
+        .map(i=>i.value).join("");
+
+    if(otp.length!==4){
+        alert("Enter 4 digit OTP");
+        return;
+    }
+    showStep(3);
+}
+</script>
+
+</body>
+</html>

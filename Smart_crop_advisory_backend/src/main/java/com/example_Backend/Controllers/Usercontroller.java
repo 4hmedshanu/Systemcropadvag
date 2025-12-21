@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +29,8 @@ public class Usercontroller {
 	UserServices userServices;
 	
 	
+	
+	
 	@GetMapping("/demo")
 	public String demo() {
 		return "done";
@@ -42,7 +45,10 @@ public class Usercontroller {
 	}
 	
 	
-	@PostMapping
+	 @PostMapping(
+		        consumes = MediaType.APPLICATION_JSON_VALUE,
+		        produces = MediaType.APPLICATION_JSON_VALUE
+		    )
 	public UserEntity createUser(@RequestBody  UserEntity user) {
 		System.out.print(user.getName());
 	    return  this.userServices.createUser(user);

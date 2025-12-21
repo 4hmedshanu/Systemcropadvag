@@ -3,6 +3,7 @@ package com.example_Backend.Entity;
 import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
@@ -37,6 +38,7 @@ public class BlogPostEntity {
     @JoinColumn(name = "user_id")
    
     @JsonManagedReference
+    
     private UserEntity user;
 
 	public int getPostId() {

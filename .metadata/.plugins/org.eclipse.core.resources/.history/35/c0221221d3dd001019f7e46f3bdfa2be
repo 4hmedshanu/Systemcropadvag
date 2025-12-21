@@ -1,0 +1,33 @@
+package com.example_Backend.Controllers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example_Backend.AiServices.chatcClientservices;
+import com.example_Backend.entityServices.WhatsAppService;
+
+
+
+@RestController
+@RequestMapping("/whatsapp")
+public class WhatsAppAlert {	
+	
+	@Autowired
+	private WhatsAppService whatsAppService;
+	
+	@Autowired
+	chatcClientservices ChatClient;
+	
+	
+	 @PostMapping("/send")
+	 public String sendMessage(@RequestParam("lange") String lang ) {
+		 
+		 	String message=this.ChatClient.Diseasealert(lang);
+	        whatsAppService.sendTextMessage("917055417849", lang);
+	        return "WhatsApp message sent successfully"+message;
+	    }
+	
+}

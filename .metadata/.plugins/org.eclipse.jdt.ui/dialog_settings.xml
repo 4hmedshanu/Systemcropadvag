@@ -12,8 +12,8 @@
 	<section name="JavaElementSearchActions">
 	</section>
 	<section name="NewClassCreationWizard.dialogBounds">
-		<item key="DIALOG_X_ORIGIN" value="785"/>
-		<item key="DIALOG_Y_ORIGIN" value="37"/>
+		<item key="DIALOG_X_ORIGIN" value="301"/>
+		<item key="DIALOG_Y_ORIGIN" value="126"/>
 		<item key="DIALOG_WIDTH" value="571"/>
 		<item key="DIALOG_HEIGHT" value="656"/>
 		<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
@@ -72,7 +72,7 @@
 		<item key="OmitCallToSuper" value="false"/>
 	</section>
 	<section name="DialogBounds_AddUnimplementedConstructorsDialog">
-		<item key="DIALOG_X_ORIGIN" value="516"/>
+		<item key="DIALOG_X_ORIGIN" value="256"/>
 		<item key="DIALOG_Y_ORIGIN" value="7"/>
 		<item key="DIALOG_WIDTH" value="518"/>
 		<item key="DIALOG_HEIGHT" value="649"/>

@@ -6,7 +6,9 @@ import java.util.List;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -25,6 +27,17 @@ public interface FeignClientconfig {
 	
 	@GetMapping("/User/getuserbyusername")
 	public UserEntity getuserbyusername(@RequestParam("email") String email);
+	
+	
+	@PostMapping("/User")
+	public UserEntity createUser(@RequestBody  UserEntity user);
+	
+	@GetMapping("/User/byid/{id}")
+	public UserEntity getUserById(@PathVariable("id") int id);
+	
+	
+	@PutMapping("/User/update/{id}")
+	public UserEntity updateUser(@PathVariable("id") int id, @RequestBody UserEntity newUser);
 	
 	
 	

@@ -51,6 +51,12 @@ public class UserServices {
 	    	if(newUser.getPasswordHash()!=null) {
 	    		old.setPasswordHash(newUser.getPasswordHash());
 	    	}
+	    	if(newUser.getOtp()!=0) {
+	    		old.setOtp(newUser.getOtp());
+	    	}
+	    	if(newUser.getRole()!=null) {
+	    		old.setRole(newUser.getRole());
+	    	}
 	    	
 	    }
 	    return userRepository.save(old);
