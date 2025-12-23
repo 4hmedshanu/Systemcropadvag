@@ -19,7 +19,7 @@ body{
     align-items:center;
     background:
         linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.55)),
-        url("images/bg.jpg") center/cover no-repeat;
+        url("https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=1920&q=80") center/cover no-repeat;
 }
 
 /* WIZARD CARD */
@@ -85,6 +85,35 @@ input, select{
     border:1px solid #ddd;
 }
 
+/* Password input wrapper for toggle button */
+.password-wrapper {
+    position: relative;
+    margin-bottom: 12px;
+}
+
+.password-wrapper input {
+    margin-bottom: 0;
+    padding-right: 45px;
+}
+
+.toggle-password-btn {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #999;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 5px;
+    transition: color 0.3s ease;
+}
+
+.toggle-password-btn:hover {
+    color: #7cb62f;
+}
+
 /* BUTTONS */
 .btn-action{
     width:100%;
@@ -118,6 +147,34 @@ input, select{
     text-align:center;
 }
 
+/* --- Back Button --- */
+.back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: rgba(124, 182, 47, 0.1);
+    border: 2px solid #7cb62f;
+    color: #7cb62f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(124, 182, 47, 0.15);
+}
+
+.back-button:hover {
+    background: #7cb62f;
+    color: #fff;
+    transform: translateX(-5px);
+    box-shadow: 0 6px 20px rgba(124, 182, 47, 0.3);
+}
+
 /* MOBILE */
 @media(max-width:520px){
     .wizard-container{
@@ -128,6 +185,10 @@ input, select{
 </head>
 
 <body>
+
+<a href="/" class="back-button" title="Back to Home">
+    <i class="fas fa-arrow-left"></i>
+</a>
 
 <div class="wizard-container">
 
@@ -153,8 +214,20 @@ input, select{
 <input name="name" placeholder="Full Name">
 <input name="phone" placeholder="Phone Number" maxlength="10">
 <input name="email" placeholder="Email">
-<input name="passwordHash" type="password" placeholder="Password">
-<input type="password" placeholder="Confirm Password">
+
+<div class="password-wrapper">
+    <input name="passwordHash" type="password" placeholder="Password" id="password1">
+    <button type="button" class="toggle-password-btn" onclick="togglePasswordVisibility('password1')">
+        <i class="fas fa-eye"></i>
+    </button>
+</div>
+
+<div class="password-wrapper">
+    <input type="password" placeholder="Confirm Password" id="password2">
+    <button type="button" class="toggle-password-btn" onclick="togglePasswordVisibility('password2')">
+        <i class="fas fa-eye"></i>
+    </button>
+</div>
 
 <button type="button" class="btn-action" onclick="submitStep1(this)">
 Next Step <i class="fas fa-arrow-right"></i>
@@ -195,12 +268,18 @@ Back
 <option value="">Preferred Language</option>
 <option value="en">English</option>
 <option value="hi">Hindi</option>
+<option value="pb">Punjabi</option>
 </select>
 
-<select name="state">
-<option value="">State</option>
-<option>Punjab</option>
-<option>Uttar Pradesh</option>
+<select name="state" id="stateSelect" onchange="updateDistricts()">
+<option value="">Select State</option>
+<option value="punjab">Punjab</option>
+<option value="uttar_pradesh">Uttar Pradesh</option>
+<option value="uttarakhand">Uttarakhand</option>
+</select>
+
+<select name="district" id="districtSelect">
+<option value="">Select District</option>
 </select>
 
 <button type="submit" class="btn-action">
@@ -216,6 +295,25 @@ Complete Registration <i class="fas fa-rocket"></i>
 		<script>
 								// Store the userId globally once received from Step 1
 				let currentUserId = null;
+
+				/**
+				 * Toggle password visibility with eye icon
+				 */
+				function togglePasswordVisibility(elementId) {
+					const passwordInput = document.getElementById(elementId);
+					const button = passwordInput.nextElementSibling;
+					const icon = button.querySelector('i');
+
+					if (passwordInput.type === 'password') {
+						passwordInput.type = 'text';
+						icon.classList.remove('fa-eye');
+						icon.classList.add('fa-eye-slash');
+					} else {
+						passwordInput.type = 'password';
+						icon.classList.remove('fa-eye-slash');
+						icon.classList.add('fa-eye');
+					}
+				}
 				
 				/**
 				 * Manages the visual transition between wizard steps
@@ -321,8 +419,214 @@ Complete Registration <i class="fas fa-rocket"></i>
 				    });
 				});
 				
+				/**
+				 * District data for each state
+				 */
+				const stateDistricts = {
+				    punjab: [
+				        "Amritsar",
+				        "Barnala",
+				        "Bathinda",
+				        "Faridkot",
+				        "Fatehgarh Sahib",
+				        "Fazilka",
+				        "Firozpur",
+				        "Gurdaspur",
+				        "Hoshiarpur",
+				        "Jalandhar",
+				        "Kapurthala",
+				        "Ludhiana",
+				        "Mansa",
+				        "Moga",
+				        "Mohali",
+				        "Muktsar",
+				        "Pathankot",
+				        "Patiala",
+				        "Rupnagar",
+				        "Sangrur",
+				        "Tarn Taran"
+				    ],
+				    uttar_pradesh: [
+				    	  "Agra",
+				    	  "Aligarh",
+				    	  "Ambedkar Nagar",
+				    	  "Amethi",
+				    	  "Amroha",
+				    	  "Auraiya",
+				    	  "Ayodhya",
+				    	  "Azamgarh",
+				    	  "Baghpat",
+				    	  "Bahraich",
+				    	  "Ballia",
+				    	  "Balrampur",
+				    	  "Banda",
+				    	  "Barabanki",
+				    	  "Bareilly",
+				    	  "Basti",
+				    	  "Bhadohi",
+				    	  "Bijnor",
+				    	  "Budaun",
+				    	  "Bulandshahr",
+				    	  "Chandauli",
+				    	  "Chitrakoot",
+				    	  "Deoria",
+				    	  "Etah",
+				    	  "Etawah",
+				    	  "Farrukhabad",
+				    	  "Fatehpur",
+				    	  "Firozabad",
+				    	  "Gautam Buddha Nagar",
+				    	  "Ghaziabad",
+				    	  "Ghazipur",
+				    	  "Gonda",
+				    	  "Gorakhpur",
+				    	  "Hamirpur",
+				    	  "Hapur",
+				    	  "Hardoi",
+				    	  "Hathras",
+				    	  "Jalaun",
+				    	  "Jaunpur",
+				    	  "Jhansi",
+				    	  "Kannauj",
+				    	  "Kanpur Dehat",
+				    	  "Kanpur Nagar",
+				    	  "Kasganj",
+				    	  "Kaushambi",
+				    	  "Kheri",
+				    	  "Kushinagar",
+				    	  "Lalitpur",
+				    	  "Lucknow",
+				    	  "Maharajganj",
+				    	  "Mahoba",
+				    	  "Mainpuri",
+				    	  "Mathura",
+				    	  "Mau",
+				    	  "Meerut",
+				    	  "Mirzapur",
+				    	  "Moradabad",
+				    	  "Muzaffarnagar",
+				    	  "Pilibhit",
+				    	  "Pratapgarh",
+				    	  "Prayagraj",
+				    	  "Raebareli",
+				    	  "Rampur",
+				    	  "Saharanpur",
+				    	  "Sambhal",
+				    	  "Sant Kabir Nagar",
+				    	  "Shahjahanpur",
+				    	  "Shamli",
+				    	  "Shravasti",
+				    	  "Siddharthnagar",
+				    	  "Sitapur",
+				    	  "Sonbhadra",
+				    	  "Sultanpur",
+				    	  "Unnao",
+				    	  "Varanasi"
+				    	],
+				    uttarakhand: [
+				        "Almora",
+				        "Bageshwar",
+				        "Chamoli",
+				        "Champawat",
+				        "Dehradun",
+				        "Hardwar",
+				        "Nainital",
+				        "Pauri",
+				        "Pithoragarh",
+				        "Rudraprayag",
+				        "Tehri",
+				        "Udham Singh Nagar",
+				        "Uttarkashi"
+				    ]
+				};
 				
-		</script>
+				/**
+				 * Updates the district dropdown based on selected state
+				 */
+				function updateDistricts() {
+                    const stateSelect = document.getElementById('stateSelect');
+                    const districtSelect = document.getElementById('districtSelect');
+                    const selectedState = stateSelect.value;
+                
+                    // Clear existing options
+                    districtSelect.innerHTML = '<option value="">Select District</option>';
+                
+                    // Populate districts based on selected state
+                    if (selectedState && stateDistricts[selectedState]) {
+                        const districts = stateDistricts[selectedState];
+                        districts.forEach(district => {
+                            const option = document.createElement('option');
+                            option.value = district.toLowerCase().replace(/ /g, '_');
+                            option.textContent = district;
+                            districtSelect.appendChild(option);
+                        });
+                    }
+                }
+                
+                // --- Final submit: AJAX post, popup on success, then redirect to login ---
+                const finalForm = document.getElementById('formStep2');
+                if (finalForm) {
+                    finalForm.addEventListener('submit', async (e) => {
+                        e.preventDefault();
+                        const form = e.target;
+
+                        // Basic client-side validation
+                        const userId = document.getElementById('hiddenUserId')?.value;
+                        const lang = form.querySelector('select[name="language"]').value;
+                        const state = form.querySelector('select[name="state"]').value;
+                        const district = form.querySelector('select[name="district"]').value;
+
+                        if (!userId) {
+                            alert('Please verify OTP before completing registration.');
+                            showStep(2);
+                            return;
+                        }
+                        if (!lang) {
+                            alert('Please select your preferred language.');
+                            return;
+                        }
+                        if (!state) {
+                            alert('Please select your state.');
+                            return;
+                        }
+                        if (!district) {
+                            alert('Please select your district.');
+                            return;
+                        }
+
+                        const submitBtn = form.querySelector('button[type="submit"]');
+                        const originalText = submitBtn ? submitBtn.innerHTML : '';
+                        if (submitBtn) {
+                            submitBtn.disabled = true;
+                            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Completing...';
+                        }
+
+                        try {
+                            const res = await fetch('/sussregister', {
+                                method: 'POST',
+                                body: new FormData(form)
+                            });
+
+                            if (res.ok) {
+                                alert('Registration successful! Redirecting to login...');
+                                window.location.href = '/login';
+                            } else {
+                                const text = await res.text();
+                                alert('Registration failed. Please try again.\n' + (text || ''));
+                            }
+                        } catch (err) {
+                            alert('Network error while completing registration. Please try again.');
+                        } finally {
+                            if (submitBtn) {
+                                submitBtn.disabled = false;
+                                submitBtn.innerHTML = originalText;
+                            }
+                        }
+                    });
+                }
+                
+                
+        </script>
 
 
 </body>

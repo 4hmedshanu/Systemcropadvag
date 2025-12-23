@@ -33,7 +33,9 @@ public class maincontroller {
 	  private EmailService emailService;
 	
 	@GetMapping("/")
-	public String homepage() {
+	public String homepage(Principal pri , Model mo) {
+		String username=pri != null ? pri.getName() : null;
+		mo.addAttribute("username" , username);
 		return "index";
 	}
 	
@@ -134,13 +136,27 @@ public class maincontroller {
 		return  "signup";
 	}
 	
-	@GetMapping("/weather")	
-	public String weather() {
-		return "weather";
+	
+	
+	@GetMapping("/crop")	
+	public String crop() {
+		return "crop";
 	}
-	
-	
-	
-	
+	@GetMapping("/fertilizer")	
+	public String fertilizer() {
+		return "fertilizer";
+	}
+	@GetMapping("/disease")	
+	public String disease() {
+		return "disease";
+	}
+	@GetMapping("/team")	
+	public String team() {
+		return "team";
+	}
+	@GetMapping("/term")	
+	public String term() {
+		return "term";
+	}
 
 }

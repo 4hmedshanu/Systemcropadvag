@@ -389,16 +389,16 @@
 
     <nav>
         <div class="logo">
-            <i class="fas fa-leaf"></i> CropAI
+            <i class="fas fa-leaf"></i> KisanChatbot
         </div>
         <div class="nav-links">
-            <a href="#">Home</a>
-            <a href="#">Features</a>
-            <a href="#">Contact</a>
+            <a href="/">Home</a>
+            <a href="/#services" target="/">Features</a>
+            <a href="/#contact">Contact</a>
         </div>
-        <div class="profile-icon">
+        <!-- <div class="profile-icon">
             <i class="far fa-user"></i>
-        </div>
+        </div> -->
     </nav>
 
     <main>    
@@ -429,7 +429,7 @@
 			            >
 			
 			        </div>
-			        <h1>Chat with our AI Assistant</h1>
+			        <!-- <h1>Chat with our AI Assistant</h1> -->
 			    </div>
 
         <div class="chat-container">
@@ -455,7 +455,7 @@
             <div class="input-wrapper">
                 <input type="text" placeholder="Type your question..." id="dynamicpromt"> 
                 
-                <button class="icon-btn"><i class="fas fa-microphone"></i></button>
+                <!-- <button class="icon-btn"><i class="fas fa-microphone"></i></button> -->
                 
                 <button class="icon-btn send-btn" type="submit" id="submitpromt"><i class="fas fa-paper-plane"></i></button>
             </div>
@@ -475,16 +475,20 @@
                     if (started) return;
                     started = true;
 
-                    video.muted = false;   // allow sound
-                    video.play();
+                    video.muted = false;
+                    video.play().catch(() => {
+                        // Autoplay may be blocked; wait for user action.
+                    });
 
                     audio.currentTime = 0;
                     audio.play().catch(() => {
-                        console.log("Audio blocked");
+                        // Autoplay may be blocked; will retry on interaction.
                     });
                 }
 
-                // First user interaction unlocks audio
+                // Attempt autoplay on page load; user interaction listeners remain as fallback.
+                document.addEventListener('DOMContentLoaded', startBot, { once: true });
+
                 document.addEventListener("click", startBot, { once: true });
                 document.addEventListener("keydown", startBot, { once: true });
 
@@ -520,4 +524,4 @@
 
     <script src="jsfile/multilingualchatbot.js"></script>
 </body>
-</html> 
+</html>
