@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -10,6 +10,41 @@
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="cssfile/style.css">
+    <style>
+        .floating-chat-btn {
+            position: fixed;
+            bottom: 22px;
+            right: 22px;
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: #fff;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            z-index: 1050;
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        }
+        .floating-chat-btn:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25);
+            background: linear-gradient(135deg, #2ecc71, #1e8449);
+        }
+        .floating-chat-btn i {
+            font-size: 1.4rem;
+        }
+        @media (max-width: 576px) {
+            .floating-chat-btn {
+                width: 52px;
+                height: 52px;
+                bottom: 16px;
+                right: 16px;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -17,9 +52,9 @@
     <header class="header-section">
         <div class="container">
             <nav class="navbar navbar-expand-lg p-0">
-                <a class="navbar-brand" href="#home">
+                <a class="navbar-brand" href="/">
                     <div class="brand-logo-wrapper">
-                        <img src="img/logo6.0.png" alt="Krishi Sahayak" class="brand-logo-img"> 
+                        <img src="img/logo6.0.png" alt="Krishi Sahayak" class="brand-logo-img">
                     </div> <span class="brand-text">KrishiSahayak</span>
                 </a>
 
@@ -29,14 +64,14 @@
 
                 <div class="collapse navbar-collapse justify-content-end" id="mainNav">
                     <ul class="navbar-nav align-items-center">
-                        <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#services" id="navServices" role="button" data-bs-toggle="dropdown" aria-expanded="false">Services</a>
                             <ul class="dropdown-menu" aria-labelledby="navServices">
-                                <li><a class="dropdown-item" href="crop.html">Crop Recommendation</a></li>
-                                <li><a class="dropdown-item" href="fertilizer.html">Fertilizer Recommendation</a></li>
-                                <li><a class="dropdown-item" href="disease.html">Disease Detection</a></li>
-                                <li><a class="dropdown-item" href="#">Weather Advisory</a></li>
+                                <li><a class="dropdown-item" href="crop">Crop Advisory</a></li>
+                                <li><a class="dropdown-item" href="fertilizer">Fertilizer Guide</a></li>
+                                <li><a class="dropdown-item" href="disease">Disease Detection</a></li>
+                                <li><a class="dropdown-item" href="weather">Weather Advisory</a></li>
                             </ul>
                         </li>
                         <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
@@ -54,7 +89,7 @@
                                 <span id="weatherTemp">24°C</span>
                             </div>
 
-                            <div class="modern-lang-wrapper me-3" id="siteLangToggle">
+                            <!-- <div class="modern-lang-wrapper me-3" id="siteLangToggle">
                                 <button class="modern-lang-btn" aria-label="Select Language">
                                     <span class="lang-flag">🇬🇧</span>
                                     <span class="lang-code">EN</span>
@@ -78,11 +113,13 @@
                                         <i class="fas fa-check opt-check"></i>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
 
-                            <a href="login" class="nav-link btn-login-nav">
-                                <i class="fas fa-user me-1"></i> Login
-                            </a>
+                            
+                                
+                                 <a href="/login" class="nav-link btn-login-nav"><span th:if="${username == null}"><i class="fas fa-user me-1"></i> Login</span></a>
+								<a href="/logout"  class="nav-link btn-login-nav"> <span th:unless="${username == null}"><i class="fas fa-user me-1"></i>Logout</span></a>
+                            
                             <a href="#contact" class="btn btn-quote">CONTACT US</a>
                         </li>
                     </ul>
@@ -91,16 +128,11 @@
         </div>
     </header>
 
-    <section class="hero-section" id="home">
+    <section class="hero-section" id="home" style="background: url('img/img.jpg') no-repeat center center/cover;">
         <div class="hero-overlay"></div>
         <div class="container position-relative z-2">
             <div class="row justify-content-center text-center">
                 <div class="col-lg-10 col-xl-8">
-
-                    <!-- <div class="hero-badge animate-fade-down">
-                        <i class="fas fa-robot me-2"></i> AI-Powered Agriculture
-                    </div> -->
-
                     <h1 class="hero-title animate-fade-up" data-i18n="hero_title">
                         Revolutionizing <br>
                         <span class="text-gradient">Indian Farming</span>
@@ -119,24 +151,6 @@
                             <i class="fas fa-play me-2"></i> Watch Demo
                         </a>
                     </div>
-
-                    <!-- <div class="hero-stats animate-fade-up delay-3">
-                        <div class="stat-item">
-                            <span class="h4 fw-bold mb-0">50k+</span>
-                            <small>Farmers</small>
-                        </div>
-                        <div class="stat-divider"></div>
-                        <div class="stat-item">
-                            <span class="h4 fw-bold mb-0">98%</span>
-                            <small>Accuracy</small>
-                        </div>
-                        <div class="stat-divider"></div>
-                        <div class="stat-item">
-                            <span class="h4 fw-bold mb-0">24/7</span>
-                            <small>Support</small>
-                        </div>
-                    </div> -->
-
                 </div>
             </div>
         </div>
@@ -158,11 +172,11 @@
                         style="background-image:linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('img/crop_sr.png');">
                         <div>
                             <i class="fas fa-seedling service-icon"></i>
-                            <h4 data-i18n="serv_crop_title">Crop Recommendation</h4>
+                            <h4 data-i18n="serv_crop_title">Crop Advisory</h4>
                             <p data-i18n="serv_crop_desc">Get AI-powered advice on the best crops to grow based on soil
                                 health and season.</p>
                         </div>
-                        <a href="crop.html" class="btn-read-more">Read More</a>
+                        <a href="crop" class="btn-read-more">Read More</a>
                     </div>
 
                     <div class="service-card"
@@ -173,7 +187,7 @@
                             <p data-i18n="serv_fert_desc">Optimize yield with precise fertilizer dosage and nutrient
                                 management plans.</p>
                         </div>
-                        <a href="fertilizer.html" class="btn-read-more" data-i18n="service_read_more">Read More</a>
+                        <a href="fertilizer" class="btn-read-more" data-i18n="service_read_more">Read More</a>
                     </div>
 
                     <div class="service-card"
@@ -184,7 +198,7 @@
                             <p data-i18n="serv_disease_desc">Upload leaf photos to instantly identify plant diseases and
                                 get cure suggestions.</p>
                         </div>
-                        <a href="disease.html" class="btn-read-more" data-i18n="service_read_more">Read More</a>
+                        <a href="disease" class="btn-read-more" data-i18n="service_read_more">Read More</a>
                     </div>
 
                     <div class="service-card"
@@ -195,7 +209,7 @@
                             <p data-i18n="serv_weather_desc">Real-time weather updates and alerts to plan your farming
                                 activities better.</p>
                         </div>
-                        <a href="weather" class="btn-read-more" target="_blank" data-i18n="service_read_more">Read More</a>
+                        <a href="weather" class="btn-read-more" data-i18n="service_read_more">Read More</a>
                     </div>
 
                     <div class="service-card"
@@ -206,7 +220,7 @@
                             <p data-i18n="serv_bot_desc">Chat with our AI assistant in your local language to solve
                                 farming queries instantly.</p>
                         </div>
-                        <a href="kisanchatbot" target="_blank" class="btn-read-more"
+                        <a href="/kisanchatbot" target="_blank" class="btn-read-more"
                             data-i18n="service_read_more">Read More</a>
                     </div>
 
@@ -242,7 +256,7 @@
                                 <i class="fas fa-users"></i>
                             </div>
                             <div class="badge-text">
-                                <h5>50,000+</h5>
+                                <h5>5,000+</h5>
                                 <span>Happy Farmers</span>
                             </div>
                         </div>
@@ -324,20 +338,6 @@
                                 </div>
                                 <button class="btn-follow">Follow</button>
                             </div>
-                            <div class="blog-footer">
-                                <div class="action-icon like-btn"><i class="far fa-heart"></i> <span
-                                        class="count">42</span></div>
-                                <div class="action-icon comment-btn"><i class="far fa-comment"></i> <span
-                                        class="comment-count">24</span></div>
-                                <div class="action-icon ms-auto share-btn"><i class="fas fa-share-alt"></i></div>
-                            </div>
-                            <div class="comment-section">
-                                <div class="comments-list"></div>
-                                <div class="comment-input-wrapper">
-                                    <input type="text" class="comment-input" placeholder="Write a comment...">
-                                    <button class="btn-post-comment">Post</button>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -347,7 +347,7 @@
                         <div class="blog-thumb-wrapper">
                             <span class="card-badge badge-sustainable"><i class="fas fa-seedling"></i>
                                 Sustainable</span>
-                            <img src="https://chatgpt.com/backend-api/estuary/public_content/enc/eyJpZCI6InVzZXItT3d4d3VXMkxhSkhuMlFza29pb3lCY1hyOmZpbGVfMDAwMDAwMDAyOWU4NzFmNWFiNWZmMDNlNzkyMWUyMjkiLCJ0cyI6IjIwNDM0IiwicCI6InB5aSIsImNpZCI6IjEiLCJzaWciOiIxNmUyNjNjZmMwODg2MWNjZDk4OGQxMTZlMzgyYzhhYWFiMWRkNzU3MDIzOWNiZjI5ZjQ1NDc4OTZmYTUyM2M2IiwidiI6IjAiLCJnaXptb19pZCI6bnVsbCwiY3AiOm51bGwsIm1hIjpudWxsfQ=="
+                            <img src="https://plus.unsplash.com/premium_photo-1678751640165-38e3ff1999c6?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8b3JnYW5pYyUyMGZhcm1pbmd8ZW58MHx8MHx8fDA%3D"
                                 alt="Organic Farming">
                         </div>
                         <div class="blog-content">
@@ -365,20 +365,6 @@
                                     </div>
                                 </div>
                                 <button class="btn-follow">Follow</button>
-                            </div>
-                            <div class="blog-footer">
-                                <div class="action-icon like-btn"><i class="far fa-heart"></i> <span
-                                        class="count">31</span></div>
-                                <div class="action-icon comment-btn"><i class="far fa-comment"></i> <span
-                                        class="comment-count">18</span></div>
-                                <div class="action-icon ms-auto share-btn"><i class="fas fa-share-alt"></i></div>
-                            </div>
-                            <div class="comment-section">
-                                <div class="comments-list"></div>
-                                <div class="comment-input-wrapper">
-                                    <input type="text" class="comment-input" placeholder="Write a comment...">
-                                    <button class="btn-post-comment">Post</button>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -407,27 +393,13 @@
                                 </div>
                                 <button class="btn-follow">Follow</button>
                             </div>
-                            <div class="blog-footer">
-                                <div class="action-icon like-btn"><i class="far fa-heart"></i> <span
-                                        class="count">56</span></div>
-                                <div class="action-icon comment-btn"><i class="far fa-comment"></i> <span
-                                        class="comment-count">32</span></div>
-                                <div class="action-icon ms-auto share-btn"><i class="fas fa-share-alt"></i></div>
-                            </div>
-                            <div class="comment-section">
-                                <div class="comments-list"></div>
-                                <div class="comment-input-wrapper">
-                                    <input type="text" class="comment-input" placeholder="Write a comment...">
-                                    <button class="btn-post-comment">Post</button>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="btn-see-more-container">
-                <a href="blog.html" class="btn-see-more">See More Posts <i class="fas fa-arrow-right ms-2"></i></a>
+                <a href="blogpage" class="btn-see-more">See More Posts <i class="fas fa-arrow-right ms-2"></i></a>
             </div>
         </div>
     </section>
@@ -648,7 +620,7 @@
                             <div class="pane-header">
                                 <div class="pane-icon-bg"><i class="fas fa-seedling"></i></div>
                                 <div>
-                                    <h3>How to use Crop Recommendation</h3>
+                                    <h3>How to use Crop Advisory</h3>
                                     <p>Maximize yield by choosing the scientifically best crop for your soil.</p>
                                 </div>
                             </div>
@@ -854,7 +826,7 @@
                             </div>
                             <div>
                                 <h6 data-i18n="lbl_location">Our Location</h6>
-                                <p class="text-muted mb-0">123 Farm Road, Agro City, India</p>
+                                <p class="text-muted mb-0">Aambag, Tanakpur, India</p>
                             </div>
                         </div>
 
@@ -864,7 +836,7 @@
                             </div>
                             <div>
                                 <h6 data-i18n="lbl_phone">Phone Number</h6>
-                                <p class="text-muted mb-0">+91 98765 43210</p>
+                                <p class="text-muted mb-0">+91 81918 26630</p>
                             </div>
                         </div>
 
@@ -876,7 +848,9 @@
                                 <h6 data-i18n="lbl_email">Email Address</h6>
                                 <p class="text-muted mb-0">support@krishisahayak.com</p>
                             </div>
+                            
                         </div>
+                        <a href="team" class="btn btn-quote">TEAM</a>
                     </div>
                 </div>
 
@@ -912,19 +886,13 @@
     </section>
 
     <footer class="footer-section">
-        
-        <!-- <div class="footer-wave">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-                <path fill="#ffffff" fill-opacity="1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
-            </svg>
-        </div> -->
 
         <div class="container position-relative z-2">
             <div class="row gy-5">
                 
                 <div class="col-lg-4 col-md-12">
-                    <a href="#home" class="footer-brand mb-4">
-                        <img src="logo6.0.png" alt="KrishiSahayak" class="footer-logo-img">
+                    <a href="/" class="footer-brand mb-4">
+                        <img src="img/logo6.0.png" alt="KrishiSahayak" class="footer-logo-img">
                         <span class="footer-brand-text">KrishiSahayak</span>
                     </a>
                     <p class="footer-desc pe-lg-5" data-i18n="footer_desc">Your trusted partner in smart agriculture. We bring technology to the fields to ensure better yield and sustainable growth for every farmer.</p>
@@ -940,25 +908,25 @@
                 <div class="col-lg-2 col-6">
                     <h5 class="footer-title" data-i18n="footer_quick_links">Quick Links</h5>
                     <ul class="footer-links">
-                        <li><a href="#home" data-i18n="nav_home">Home</a></li>
-                        <li><a href="#about" data-i18n="nav_about">About Us</a></li>
-                        <li><a href="#services" data-i18n="nav_services">Services</a></li>
-                        <li><a href="#blog" data-i18n="nav_blog">Blog</a></li>
-                        <li><a href="#benefits" data-i18n="nav_benefits">Benefits</a></li>
-                        <li><a href="#community-features" data-i18n="nav_experts">Experts</a></li>
-                        <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
+                        <li><a href="/" data-i18n="nav_home">Home</a></li>
+                        <li><a href="/#about" data-i18n="nav_about">About Us</a></li>
+                        <li><a href="/#services" data-i18n="nav_services">Services</a></li>
+                        <li><a href="/#blog" data-i18n="nav_blog">Blog</a></li>
+                        <li><a href="/#benefits" data-i18n="nav_benefits">Benefits</a></li>
+                        <li><a href="/#community-features" data-i18n="nav_experts">Experts</a></li>
+                        <li><a href="/#contact" data-i18n="nav_contact">Contact</a></li>
                     </ul>
                 </div>
 
                 <div class="col-lg-3 col-6">
                     <h5 class="footer-title" data-i18n="footer_our_services">Our Services</h5>
                     <ul class="footer-links">
-                        <li><a href="#" data-i18n="tab_crop">Crop Recommendation</a></li>
-                        <li><a href="#" data-i18n="tab_fert">Fertilizer Recommendation</a></li>
-                        <li><a href="#" data-i18n="tab_disease">Disease Detection</a></li>
-                        <li><a href="#" data-i18n="tab_weather">Weather Forecast</a></li>
-                        <li><a href="#" data-i18n="tab_chat">Farming Chatbot</a></li>
-                        <li><a href="#" data-i18n="tab_chat">Strong Blog Community</a></li>
+                        <li><a href="/#services" data-i18n="tab_crop">Crop Advisory</a></li>
+                        <li><a href="/#services" data-i18n="tab_fert">Fertilizer Guide</a></li>
+                        <li><a href="/#services" data-i18n="tab_disease">Disease Detection</a></li>
+                        <li><a href="/#services" data-i18n="tab_weather">Weather Forecast</a></li>
+                        <li><a href="/#services" data-i18n="tab_chat">Farming Chatbot</a></li>
+                        <li><a href="/#services" data-i18n="tab_chat">Strong Blog Community</a></li>
                     </ul>
                 </div>
 
@@ -982,8 +950,8 @@
                         <p class="mb-0 small text-white-50">© 2025 KrishiSahayak. All Rights Reserved.</p>
                     </div>
                     <div class="col-md-6 text-center text-md-end">
-                        <a href="#" class="footer-legal-link me-3">Privacy Policy</a>
-                        <a href="#" class="footer-legal-link">Terms of Service</a>
+                        <a href="term" class="footer-legal-link me-3">Privacy Policy</a>
+                        <a href="term" class="footer-legal-link">Terms of Service</a>
                     </div>
                 </div>
             </div>
@@ -1005,7 +973,7 @@
                                 type="password" class="form-control" placeholder="******"></div>
                         <div class="d-grid"><button type="submit" class="btn btn-hero w-100">Login</button></div>
                     </form>
-                    <p class="text-center mt-3 small text-muted">Don't have an account? <a href="#"
+                    <p class="text-center mt-3 small text-muted">Don't have an account? <a href="signup"
                             class="text-success text-decoration-none fw-bold" data-bs-toggle="modal"
                             data-bs-target="#signupModal" data-bs-dismiss="modal">Sign up</a></p>
                 </div>
@@ -1031,7 +999,7 @@
                         <div class="d-grid"><button type="submit" class="btn btn-hero w-100">Create Account</button>
                         </div>
                     </form>
-                    <p class="text-center mt-3 small text-muted">Already have an account? <a href="#"
+                    <p class="text-center mt-3 small text-muted">Already have an account? <a href="login"
                             class="text-success text-decoration-none fw-bold" data-bs-toggle="modal"
                             data-bs-target="#loginModal" data-bs-dismiss="modal">Login</a></p>
                 </div>
@@ -1041,6 +1009,96 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="jsfile/script.js"></script>
+
+    <script>
+        // Auto-fetch location and weather on page load
+        document.addEventListener('DOMContentLoaded', initNavbarWeather);
+
+        const fallbackCoords = { lat: 28.9845, lon: 77.7064, label: 'Meerut' };
+        const geoOptions = { enableHighAccuracy: true, timeout: 20000, maximumAge: 0 };
+        const relaxedGeoOptions = { enableHighAccuracy: false, timeout: 10000, maximumAge: 60000 };
+
+        function requestLocation() {
+            initNavbarWeather();
+        }
+
+        // Initialize navbar weather: detect location and fetch current weather
+        function initNavbarWeather(useRelaxed = false) {
+            const updateFromCoords = async (lat, lon, label) => {
+                // Fetch location name if not manually provided
+                if (!label || label === 'Precise location' || label === 'Approximate location') {
+                    const locationName = await getLocationName(lat, lon);
+                    fetchCurrentWeatherForNavbar(lat, lon, locationName);
+                } else {
+                    fetchCurrentWeatherForNavbar(lat, lon, label);
+                }
+            };
+
+            if ("geolocation" in navigator) {
+                const opts = useRelaxed ? relaxedGeoOptions : geoOptions;
+                navigator.geolocation.getCurrentPosition(
+                    pos => updateFromCoords(pos.coords.latitude, pos.coords.longitude, null),
+                    err => {
+                        console.warn('Navbar geolocation error:', err);
+                        // Try relaxed once, then fallback
+                        if (!useRelaxed) return initNavbarWeather(true);
+                        updateFromCoords(fallbackCoords.lat, fallbackCoords.lon, fallbackCoords.label);
+                    },
+                    opts
+                );
+            } else {
+                updateFromCoords(fallbackCoords.lat, fallbackCoords.lon, fallbackCoords.label);
+            }
+        }
+
+        // Reverse geocoding to get location name from coordinates
+        async function getLocationName(lat, lon) {
+            try {
+                const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=10`;
+                const res = await fetch(url, {
+                    headers: {
+                        'User-Agent': 'KrishiSahayak-Weather-App'
+                    }
+                });
+                const data = await res.json();
+                
+                // Extract the most relevant location name
+                const address = data.address || {};
+                const locationName = address.city || 
+                                    address.town || 
+                                    address.village || 
+                                    address.county || 
+                                    address.state || 
+                                    `${lat.toFixed(2)}, ${lon.toFixed(2)}`;
+                
+                return locationName;
+            } catch (e) {
+                console.warn('Reverse geocoding failed:', e);
+                return `${lat.toFixed(2)}, ${lon.toFixed(2)}`;
+            }
+        }
+
+        // Fetch current weather for navbar
+        async function fetchCurrentWeatherForNavbar(lat, lon, label = null) {
+            try {
+                const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m`;
+                const res = await fetch(url);
+                const data = await res.json();
+                const temp = data?.current?.temperature_2m;
+                const locationTextEl = document.getElementById('locationText');
+                const weatherTempEl = document.getElementById('weatherTemp');
+                
+                if (typeof temp === 'number' && weatherTempEl) {
+                    weatherTempEl.textContent = `${Math.round(temp)}°C`;
+                }
+                if (locationTextEl) {
+                    locationTextEl.textContent = label || `${lat.toFixed(2)}, ${lon.toFixed(2)}`;
+                }
+            } catch (e) {
+                console.warn('Navbar weather fetch failed:', e);
+            }
+        }
+    </script>
 
     <div class="modal fade" id="videoModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -1058,6 +1116,9 @@
             </div>
         </div>
     </div>
+    <a href="/kisanchatbot" class="floating-chat-btn" aria-label="Open Kisan Chatbot" title="Kisan Chatbot">
+        <i class="fas fa-robot"></i>
+    </a>
 </body>
 
 </html>

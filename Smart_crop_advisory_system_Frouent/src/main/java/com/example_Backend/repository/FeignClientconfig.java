@@ -3,6 +3,7 @@ package com.example_Backend.repository;
 
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,6 +49,19 @@ public interface FeignClientconfig {
 	
 	@GetMapping("/blog")
 	public List<BlogPostEntity> findallblog();
+	
+	
+	
+	@PostMapping("/whatsapp/sandbox/join")
+	 public Map<String, String> sandboxJoinInstruction();
+	 
+	 @PostMapping("/whatsapp/sendmess")
+	 public String sendMessages(
+	         @RequestParam("lange") String lang,
+	         @RequestParam String city,
+	         @RequestParam String phone   // 👈 dynamic number
+	 );
+	
 	
 	
 }

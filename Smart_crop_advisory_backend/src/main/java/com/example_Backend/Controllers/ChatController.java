@@ -32,8 +32,8 @@ public class ChatController {
 	}
 	
 	@GetMapping("/alert")
-	public String agricultureAIalert(@RequestParam ("lang") String lange) {
-		return ChatClient.Diseasealert(lange);
+	public String agricultureAIalert(@RequestParam ("lang") String lange , @RequestParam ("city") String city) {
+		return ChatClient.Diseasealert(lange,city);
 	}
 	
 

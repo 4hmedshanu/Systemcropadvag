@@ -29,10 +29,16 @@ public class WebSecurity {
         	        "/login",
         	        "/signup",
         	        "/generatedOtp",
+        	        "/verifyOtp",
         	        "/sussregister",
+        	        "/kisanchatbot",
         	        "/cssfile/**",
         	        "/jsfile/**",
-        	        "/img/**","/"
+        	        "/img/**",
+        	        "/gif/**",
+        	        "/team",
+        	        "/term"
+        	        ,"/"
         	    ).permitAll()
 
         	    .requestMatchers("/blogpage").hasAnyRole("USER","ADMIN")

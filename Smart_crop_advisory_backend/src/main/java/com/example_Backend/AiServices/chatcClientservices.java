@@ -34,30 +34,35 @@ public class chatcClientservices {
 	}
 	
 	
-	public String Diseasealert(String language) {
+public String Diseasealert(String language, String city) {
 
 	    String prompt = """
 	        You are an AI assistant for an Indian Smart Crop Advisory System.
 
 	        Generate a WhatsApp alert for Indian farmers.
 
+	        Location:
+	        - City/District: %s (India)
+
 	        Requirements:
 	        - Agriculture-related
-	        - Disease outbreak or severe weather
-	        - Indian crops and conditions
-	        - Include:
-	          • Current problem
-	          • What may happen in coming days
-	          • Preventive advice
+	        - Disease outbreak OR severe weather
+	        - Based on crops commonly grown near %s
+	        - Consider local climate and seasonal risks
+
+	        Include:
+	        • Current problem in the area
+	        • What may happen in the coming days
+	        • Preventive advice for farmers
 
 	        Language: %s
 
 	        Rules:
-	        - Simple farmer words
-	        - WhatsApp style
+	        - Simple farmer-friendly words
+	        - WhatsApp message style
 	        - 4–6 short lines
-	        - Use emojis
-	        """.formatted(language);
+	        - Use emojis (🌾🌧️🐛⚠️)
+	        """.formatted(city, city, language);
 
 	    return this.chatclient.prompt()
 	            .user(prompt)
