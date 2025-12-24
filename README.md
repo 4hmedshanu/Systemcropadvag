@@ -1,8 +1,4 @@
-Here is the **Master `README.md**` file for your entire repository.
 
-I have integrated the **Backend documentation**, the **Technical Specifications of all 3 AI Models**, and the **Exact File Structure** into a single, cohesive, professional document.
-
----
 
 ```markdown
 # 🌾 Smart Crop Advisory System (Krishi Sahayak)
