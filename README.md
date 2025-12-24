@@ -1,6 +1,5 @@
 
 
-```markdown
 # 🌾 Smart Crop Advisory System (Krishi Sahayak)
 
 > **A Holistic AI-Powered Agricultural Decision Support System**
