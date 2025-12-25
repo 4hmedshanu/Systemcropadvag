@@ -1,0 +1,73 @@
+Systemcropadvag/
+├── LICENSE
+├── README.md
+│
+├── 📂 SCAS DATA/                          # Raw Datasets
+│   ├── 📂 crop_recommendation_data/
+│   │   └── crop_recommendation_dataset.csv
+│   └── 📂 fertilizer_recommendation_data/
+│       └── fertlizer_recommendation_dataset.csv
+│
+├── 📂 scas ML models/                     # [AI/ML ENGINE] Python Logic
+│   ├── 📂 EDA/                            # Exploratory Data Analysis
+│   │   ├── EDA_crop_data.ipynb
+│   │   └── EDA_fertilizer_data.ipynb
+│   │
+│   ├── 📂 crop recommendation/            # Model 1: Crop Selection
+│   │   ├── crop_api.py                    # FastAPI Entry Point
+│   │   ├── crop_model_final.pkl           # Trained Model
+│   │   ├── model 5.0.ipynb                # Training Notebook
+│   │   ├── scaler_final.pkl
+│   │   ├── label_encoder_final.pkl
+│   │   └── requirements.txt
+│   │
+│   ├── 📂 fertilizer recommendation/      # Model 2: Fertilizer Logic
+│   │   ├── fertilizer_api.py              # FastAPI Entry Point
+│   │   ├── fertilizer_model_final.pkl     # Trained Model
+│   │   ├── fert_model_3.1.ipynb           # Training Notebook
+│   │   └── requirements.txt
+│   │
+│   └── 📂 disease detection/              # Model 3: Image Processing
+│       ├── disease_api.py                 # FastAPI Entry Point
+│       ├── final_disease_model.h5         # Trained CNN Weights (Deep Learning)
+│       ├── plant_disease_model_notebook.ipynb
+│       ├── class_indices.json             # Disease Labels
+│       └── requirements.txt
+│
+├── 📂 Smart_crop_advisory_backend/        # [BACKEND API] Java Spring Boot
+│   ├── pom.xml
+│   ├── backend_sql.sql                    # Database Schema
+│   └── src/main/java/com/example_Backend/
+│       ├── SmartCropAdvisoryBackendApplication.java
+│       ├── 📂 ConfigSecurity/             # Auth & Security
+│       ├── 📂 Controllers/                # REST Controllers (Chat, User, Blog)
+│       ├── 📂 DTO/                        # Data Transfer Objects
+│       ├── 📂 Entity/                     # DB Models (User, Crop, Soil, etc.)
+│       ├── 📂 Repository/                 # JPA Repositories
+│       └── 📂 entityServices/             # Business Logic (Email, WhatsApp)
+│
+└── 📂 Smart_crop_advisory_system_Frouent/ # [FRONTEND WEB APP] Java Spring Boot
+    ├── pom.xml
+    └── src/main/
+        ├── java/com/example_Backend/
+        │   ├── 📂 endpoint/               # Web Controllers (Views)
+        │   ├── 📂 entity/
+        │   └── 📂 repository/             # External API Calls (Feign Clients)
+        │
+        └── resources/
+            ├── application.properties
+            ├── 📂 static/                 # Static Assets
+            │   ├── 📂 cssfile/            # Styles (style.css, blog_style.css)
+            │   ├── 📂 jsfile/             # Scripts (script.js, chatbot.js)
+            │   ├── 📂 img/                # Images & Icons
+            │   └── 📂 gif/
+            │
+            └── 📂 templates/              # HTML Views (Thymeleaf)
+                ├── index.html
+                ├── login.html
+                ├── signup.html
+                ├── crop.html              # Connects to Crop API
+                ├── fertilizer.html        # Connects to Fertilizer API
+                ├── disease.html           # Connects to Disease API
+                ├── weather.html
+                └── blog.html
