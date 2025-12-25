@@ -1,259 +1,261 @@
 
-# 🌾 Smart Crop Advisory System – Backend
 
-*AI-powered backend platform for intelligent agricultural decision support*
+# 🌾 Smart Crop Advisory System (Krishi Sahayak)
 
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-brightgreen)
-![Java](https://img.shields.io/badge/Java-21-orange)
-![MySQL](https://img.shields.io/badge/Database-MySQL-blue)
-![AI](https://img.shields.io/badge/AI-Spring%20AI-purple)
-![WhatsApp](https://img.shields.io/badge/WhatsApp-Twilio-25D366)
-![Build](https://img.shields.io/badge/Build-Maven-red)
-![License](https://img.shields.io/badge/License-MIT-lightgrey)
+> **A Holistic AI-Powered Agricultural Decision Support System**
+
+![Java](https://img.shields.io/badge/Java-21-orange?logo=openjdk)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-brightgreen?logo=springboot)
+![Python](https://img.shields.io/badge/Python-3.14-blue?logo=python)
+![FastAPI](https://img.shields.io/badge/Microservices-FastAPI-teal?logo=fastapi)
+![TensorFlow](https://img.shields.io/badge/AI-TensorFlow%20%7C%20Scikit--Learn-red?logo=tensorflow)
+![MySQL](https://img.shields.io/badge/Database-MySQL-blue?logo=mysql)
+![WhatsApp](https://img.shields.io/badge/Integrations-Twilio%20WhatsApp-25D366?logo=whatsapp)
 
 ---
 
 ## 📌 Project Overview
 
-The **Smart Crop Advisory System – Backend** is a **Spring Boot 3.x–based, AI-driven backend application** designed to assist farmers with **data-driven agricultural insights**.
+**Krishi Sahayak** is a comprehensive agricultural ecosystem designed to bridge the gap between advanced technology and farmers. It integrates **Machine Learning, Deep Learning, and IoT-ready architectures** to provide real-time, data-driven advice.
 
-It integrates **AI advisory services, disease and weather alerts, WhatsApp notifications, and a community blogging platform** into a unified, scalable backend system.
+Unlike simple advisory apps, this system uses a **Microservices Architecture** where the AI Brain (Python) operates independently from the Application Core (Java Spring Boot), ensuring scalability and high performance.
 
-🎓 **Academic Context**
-**B.Tech Minor Project | AI + Agriculture**
-
----
-
-## 🚀 Core Features
-
-### 👤 User Management
-
-* User registration and authentication
-* Secure login using Spring Security
-* Update and delete user profiles
-* Fetch users by ID or email
-
-### 🤖 AI Advisory
-
-* AI chatbot for agriculture-related queries
-* Streaming AI responses for real-time interaction
-* AI-generated disease and advisory messages
-
-### 📢 WhatsApp Alerts
-
-* Twilio WhatsApp Sandbox integration
-* Automated alert notifications
-* Dynamic phone number support
-
-### 📝 Blog & Community
-
-* Create, update, and delete blog posts
-* Comment system for community interaction
-* Fetch blogs by user
-* Knowledge sharing among farmers
+### 🌟 Key Features
+* **🌱 Precision Crop Recommendation:** Stacking Ensemble ML to suggest the best crop for specific soil conditions.
+* **🧪 Intelligent Fertilizer Guide:** Hybrid (ML + Rule-based) system for nutrient optimization.
+* **🌿 Visual Disease Doctor:** CNN-based image analysis to detect plant diseases instantly.
+* **🤖 AI Agronomist Chatbot:** Generative AI-powered chat for solving queries in local languages.
+* **📢 Real-time Alerts:** Automated WhatsApp alerts for weather changes and disease outbreaks.
+* **🌍 Community Blog:** A platform for farmers and experts to share knowledge.
 
 ---
 
-## 🛠️ Technology Stack
+## 📂 System Architecture & File Structure
 
-| Layer                | Technology                  |
-| -------------------- | --------------------------- |
-| Backend Framework    | Spring Boot 3.x             |
-| Programming Language | Java 21                     |
-| ORM                  | Spring Data JPA (Hibernate) |
-| Security             | Spring Security             |
-| Database             | MySQL                       |
-| AI Integration       | Spring AI (OpenAI)          |
-| Messaging            | Twilio WhatsApp             |
-| Build Tool           | Maven                       |
+This repository follows a **Microservices-oriented** structure, separating the Java Backend, Frontend, and Python AI modules.
 
----
-
-## 📂 Project Structure
-
-```
-Smart_Crop_Advisory_Backend/
+```bash
+Systemcropadvag/
+├── LICENSE
+├── README.md
 │
-├── src/main/java/com/example_Backend
-│   ├── controller
-│   │   ├── UserController.java
-│   │   ├── ChatController.java
-│   │   ├── WhatsAppAlertController.java
-│   │   └── BlogController.java
+├── 📂 SCAS DATA/                          # Raw Datasets
+│   ├── 📂 crop_recommendation_data/
+│   │   └── crop_recommendation_dataset.csv
+│   └── 📂 fertilizer_recommendation_data/
+│       └── fertlizer_recommendation_dataset.csv
+│
+├── 📂 scas ML models/                     # [AI/ML ENGINE] Python Logic
+│   ├── 📂 EDA/                            # Exploratory Data Analysis
+│   │   ├── EDA_crop_data.ipynb
+│   │   └── EDA_fertilizer_data.ipynb
 │   │
-│   ├── entity
-│   ├── dto
-│   ├── service
-│   └── Application.java
+│   ├── 📂 crop recommendation/            # Model 1: Crop Selection
+│   │   ├── crop_api.py                    # FastAPI Entry Point
+│   │   ├── crop_model_final.pkl           # Trained Model
+│   │   ├── model 5.0.ipynb                # Training Notebook
+│   │   ├── scaler_final.pkl
+│   │   ├── label_encoder_final.pkl
+│   │   └── requirements.txt
+│   │
+│   ├── 📂 fertilizer recommendation/      # Model 2: Fertilizer Logic
+│   │   ├── fertilizer_api.py              # FastAPI Entry Point
+│   │   ├── fertilizer_model_final.pkl     # Trained Model
+│   │   ├── fert_model_3.1.ipynb           # Training Notebook
+│   │   └── requirements.txt
+│   │
+│   └── 📂 disease detection/              # Model 3: Image Processing
+│       ├── disease_api.py                 # FastAPI Entry Point
+│       ├── final_disease_model.h5         # Trained CNN Weights (Deep Learning)
+│       ├── plant_disease_model_notebook.ipynb
+│       ├── class_indices.json             # Disease Labels
+│       └── requirements.txt
 │
-├── src/main/resources
-│   └── application.properties
+├── 📂 Smart_crop_advisory_backend/        # [BACKEND API] Java Spring Boot
+│   ├── pom.xml
+│   ├── backend_sql.sql                    # Database Schema
+│   └── src/main/java/com/example_Backend/
+│       ├── SmartCropAdvisoryBackendApplication.java
+│       ├── 📂 ConfigSecurity/             # Auth & Security
+│       ├── 📂 Controllers/                # REST Controllers (Chat, User, Blog)
+│       ├── 📂 DTO/                        # Data Transfer Objects
+│       ├── 📂 Entity/                     # DB Models (User, Crop, Soil, etc.)
+│       ├── 📂 Repository/                 # JPA Repositories
+│       └── 📂 entityServices/             # Business Logic (Email, WhatsApp)
 │
-├── pom.xml
-└── README.md
+└── 📂 Smart_crop_advisory_system_Frouent/ # [FRONTEND WEB APP] Java Spring Boot
+    ├── pom.xml
+    └── src/main/
+        ├── java/com/example_Backend/
+        │   ├── 📂 endpoint/               # Web Controllers (Views)
+        │   ├── 📂 entity/
+        │   └── 📂 repository/             # External API Calls (Feign Clients)
+        │
+        └── resources/
+            ├── application.properties
+            ├── 📂 static/                 # Static Assets
+            │   ├── 📂 cssfile/            # Styles (style.css, blog_style.css)
+            │   ├── 📂 jsfile/             # Scripts (script.js, chatbot.js)
+            │   ├── 📂 img/                # Images & Icons
+            │   └── 📂 gif/
+            │
+            └── 📂 templates/              # HTML Views (Thymeleaf)
+                ├── index.html
+                ├── login.html
+                ├── signup.html
+                ├── crop.html              # Connects to Crop API
+                ├── fertilizer.html        # Connects to Fertilizer API
+                ├── disease.html           # Connects to Disease API
+                ├── weather.html
+                └── blog.html
 ```
 
 ---
 
-## ⚙️ Environment Configuration
+## 🚀 Module 1: The Backend (Java Spring Boot)
 
-### `application.properties` (Example)
+The central nervous system of Krishi Sahayak, handling user data, security, and communication.
 
-```properties
-spring.application.name=smart-crop-advisory-backend
-server.port=8082
+### Tech Stack
 
-# Database Configuration
-spring.datasource.url=jdbc:mysql://localhost:3306/smart_crop_advisory_db
-spring.datasource.username=YOUR_DB_USERNAME
-spring.datasource.password=YOUR_DB_PASSWORD
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+* **Framework:** Spring Boot 3.x (Java 21)
+* **Database:** MySQL 8.0 (Hibernate/JPA)
+* **Security:** Spring Security (RBAC)
+* **Messaging:** Twilio SDK (WhatsApp)
 
-# JPA / Hibernate
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.show-sql=true
-spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
+### Key Capabilities
 
-# AI Configuration
-spring.ai.openai.api-key=YOUR_OPENAI_API_KEY
+1. **User Management:** Secure Registration, Login, and Profile updates.
+2. **Blog Platform:** Full CRUD capabilities for community posts and comments.
+3. **WhatsApp Alerts:** Push notification service for critical agricultural alerts.
+4. **History Tracking:** Saves user's past predictions (Soil reports, Disease scans) for future reference.
 
-# Twilio WhatsApp Configuration
-twilio.account.sid=YOUR_TWILIO_ACCOUNT_SID
-twilio.auth.token=YOUR_TWILIO_AUTH_TOKEN
-twilio.whatsapp.from=whatsapp:+14155238886
-```
+### 🔌 Core API Endpoints
 
----
-
-## 🔐 Security Note
-
-⚠️ **Never commit sensitive credentials to GitHub.**
-
-Add the following entry to your `.gitignore` file:
-
-```
-application.properties
-```
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `POST` | `/User` | Register new user |
+| `GET` | `/User/login` | Authenticate user |
+| `POST` | `/whatsapp/sandbox/join` | Connect user to WhatsApp alerts |
+| `POST` | `/blog/createBlog` | Publish community post |
 
 ---
 
-## 🧪 Getting Started
+## 🧠 Module 2: The AI Brain (Python Microservices)
 
-### 1️⃣ Clone the Repository
+The intelligence layer consists of three independent models exposed via **FastAPI**.
+
+<details>
+<summary><b>1️⃣ Crop Recommendation Model (Port 8000)</b></summary>
+
+* **Goal:** Recommends the most biologically suitable crop.
+* **Algorithm:** **Stacking Ensemble Classifier**
+* *Base Learners:* Random Forest, XGBoost, KNN.
+* *Meta Learner:* Logistic Regression.
+
+
+* **Inputs:** N, P, K, Temperature, Humidity, pH, Rainfall.
+* **Performance:** ~93.3% Accuracy on test data.
+* **Unique Feature:** Uses feature scaling (`StandardScaler`) to normalize rainfall and chemical data for higher precision.
+
+</details>
+
+<details>
+<summary><b>2️⃣ Fertilizer Recommendation Model (Port 8001)</b></summary>
+
+* **Goal:** Suggests specific fertilizer products and dosages.
+* **Algorithm:** **Voting Classifier (Soft Voting)** combining Random Forest and Gradient Boosting.
+* **Inputs:** Soil Type, Crop Type, N, P, K, Moisture, Weather data.
+* **Logic Layer:** Includes a post-processing rule engine. *Example: If the model suggests 'Complex NPK' but Nitrogen is critically low, the system overrides to suggest 'Urea'.*
+* **Performance:** ~95% Accuracy.
+
+</details>
+
+<details>
+<summary><b>3️⃣ Plant Disease Detection Model (Port 8002)</b></summary>
+
+* **Goal:** Identifies 34 unique plant diseases from leaf images.
+* **Architecture:** **MobileNetV2** (Transfer Learning).
+* *Optimization:* Trained using **Mixed Precision (float16)** for faster inference.
+
+
+* **Input:** 224x224 RGB Images.
+* **Performance:** ~83% Validation Accuracy.
+* **Classes:** Includes Blights, Rusts, Mildews, and Healthy states for crops like Tomato, Potato, Corn, and Rice.
+
+</details>
+
+---
+
+## 💻 Installation & Setup Guide
+
+### Phase 1: Database Setup
+
+1. Install **MySQL Server**.
+2. Create a database named `smart_crop_advisory_db`.
+3. Run the script `backend_sql.sql` (located in the backend folder) to initialize tables.
+
+### Phase 2: AI Microservices (Python)
+
+*Requires Python 3.14*
 
 ```bash
-git clone https://github.com/your-username/smart-crop-advisory-backend.git
+# Navigate to models folder
+cd "scas ML models"
+
+# Create Environment
+python -m venv venv
+source venv/bin/activate  # (Windows: venv\Scripts\activate)
+
+# Install Dependencies
+pip install -r requirements.txt
+
+# Run the 3 API Servers (Open 3 separate terminals)
+uvicorn "crop recommendation.crop_api":app --port 8000 --reload
+uvicorn "fertilizer recommendation.fertilizer_api":app --port 8001 --reload
+python "disease detection/disease_api.py"  # Runs on 8002
+
 ```
 
-### 2️⃣ Import the Project
+### Phase 3: Backend & Frontend (Java)
 
-* Open **Eclipse** or **IntelliJ IDEA**
-* Import as an **Existing Maven Project**
+*Requires JDK 21+ and Maven*
 
-### 3️⃣ Build the Project
-
+1. **Configure:** Update `src/main/resources/application.properties` with your MySQL credentials and Twilio/OpenAI keys.
+2. **Run:**
 ```bash
-mvn clean install
-```
-
-### 4️⃣ Run the Application
-
-```bash
-mvn spring-boot:run
-```
-
-The application will be available at:
+cd Smart_crop_advisory_system_Frouent
+./mvnw spring-boot:run
 
 ```
-http://localhost:8082
-```
+
+
+3. **Access:** Open Browser -> `http://localhost:8080` (or the configured port).
 
 ---
 
-## 🔗 REST API Overview
+## ⚠️ Disclaimer
 
-### 👤 User APIs
-
-```
-POST   /User
-GET    /User/login
-GET    /User/byid/{id}
-PUT    /User/update/{id}
-DELETE /User/deleteuserbyid/{id}
-```
-
-### 🤖 AI Advisory APIs
-
-```
-GET /ai/demo?q=question
-GET /ai/ask?q=question
-GET /ai/alert?lang=hi&city=Delhi
-```
-
-### 📢 WhatsApp APIs
-
-```
-POST /whatsapp/sandbox/join
-POST /whatsapp/sendmess
-```
-
-### 📝 Blog APIs
-
-```
-POST /blog/createBlog
-GET  /blog
-GET  /blog/getbyuserid/{id}
-POST /blog/createdcomment/{id}
-```
+> **Academic Project:** This system is developed for the **B.Tech Minor Project** evaluation.
+> * **Advisory Nature:** All AI predictions are suggestions based on data patterns. Farmers should consult agricultural extension officers before large-scale implementation.
+> * **Data:** Models are trained on public datasets (Kaggle/PlantVillage) and may require fine-tuning for specific local soil variations.
+> 
+> 
 
 ---
 
-## 📲 WhatsApp Sandbox Setup
+## 👨‍💻 Meet the Team
 
-1. Start the backend application
-2. Call the following API:
+| Developer | Role | Contact |
+| --- | --- | --- |
+| **Shanu Ahmed** | Full Stack & AI Lead | 📧 [Email](mailto:shanuahmed03@gmail.com) |
+| **Abhay Maurya** | Backend Architect | 📧 [Email](mailto:abhay.maurya0303@gmail.com) |
+| **Amit Yadav** | Database & Security | 📧 [Email](mailto:amity3289@gmail.com) |
+| **Varun Rana** | Frontend Integration | 📧 [Email](mailto:varunrana1902@example.com) |
+| **Samir Ahmad** | Testing & QA | 📧 [Email](mailto:azharahmad5310@gmail.com) |
 
-```http
-POST /whatsapp/sandbox/join
-```
+<p align="center">
+<b>🌟 Made with ❤️ for the Indian Farming Community 🌟</b>
+</p>
 
-✔ Opens WhatsApp automatically
-✔ Joins Twilio Sandbox
-✔ Enables alert delivery
-
----
-
-## 📘 Documentation
-
-* Minor Project Report
-* System Architecture Diagram
-* Workflow Diagram
-* ER Diagram
-* Methodology, Results, and Future Scope
-
----
-
-## 👨‍💻 Contributors
-
-| Name            |
-| --------------- |
-| **Shanu Ahmed** |
-| Abhay Maurya    |
-| Amit Yadav      |
-| Varun Rana      |
-| Samir Ahmad     |
-
----
-
-## 🤝 Contribution Guidelines
-
-1. Fork the repository
-2. Create a new feature branch
-3. Commit changes with clear messages
-4. Push the branch and open a Pull Request
-
----
-
-
-
-
+`
